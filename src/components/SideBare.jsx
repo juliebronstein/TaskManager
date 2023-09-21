@@ -11,6 +11,9 @@ import { TaskContext } from "../context/TasksContext";
 
 const SideBar = () => {
   const { categories } = useContext(TaskContext);
+  const filterOption=()=>{
+    
+  }
   return (
     <div className="d-none d-md-flex col-2 sidebare ">
       <img className="col-6" src={pic} alt="" />
@@ -19,7 +22,7 @@ const SideBar = () => {
           <BsClipboard2Check className="icon" />
           Task
         </div>
-        <Collaps title="Categories" options={categories}>
+        <Collaps title="Categories" options={categories} filterOption={filterOption}>
           <AddCategory className="col-10 text-center mt-2 add" />
         </Collaps>
         <div className="cursor-pointer mt-1 ps-3 f-sidebare">

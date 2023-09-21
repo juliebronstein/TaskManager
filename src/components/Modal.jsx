@@ -1,9 +1,8 @@
-import { useState } from "react";
+
 import Modal from "react-bootstrap/Modal";
-import AddButton from "./Task/AddButton";
 
 function ModalCenter({ title, children, show, setShow }) {
-  const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false)
   return (
     <Modal
       show={show}

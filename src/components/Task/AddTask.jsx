@@ -108,7 +108,7 @@ const onSubmit = async (
     setErr(true);
     throw error;
   }
-
+  setLoading(false)
   actions.resetForm();
   setShow(false);
 }

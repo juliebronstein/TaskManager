@@ -6,7 +6,7 @@ import { FiFolderPlus } from "react-icons/fi";
 import { Collapse } from "react-bootstrap";
 import { ConvertColor } from "./ConvertColor";
 
-const Collaps = ({ title, options, children }) => {
+const Collaps = ({ title, options, children,filterOption }) => {
   const [open, setOpen] = useState(false);
   const toggleCollapse = () => {
     setOpen(!open);
@@ -35,6 +35,7 @@ const Collaps = ({ title, options, children }) => {
               <div
                 className="d-flex pointer f-sidebare"
                 key={option.id + "_" + option.title}
+                onClick={filterOption}
               >
                 {option.title}
               </div>

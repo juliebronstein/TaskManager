@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {MdModeEdit} from 'react-icons/md'
 import { ConvertColor } from '../form/ConvertColor';
 import { deleteDoc, doc } from 'firebase/firestore';
@@ -8,6 +8,7 @@ import DeleteModal from './DeleteModal';
 
 const TaskCart = ({task,className,state,setEditTask,setShow}) => {
   const {setTasks}=useContext(TaskContext)
+  const [loading,setLoading]=useState(false)
   const deleteTask = async (taskId) => {
    
     // try {
@@ -20,6 +21,7 @@ const TaskCart = ({task,className,state,setEditTask,setShow}) => {
     // }
   }
   const handleDelete = (id) => {
+    setLoading(true)
     deleteTask(id)
       .then(() => {
         setTasks((prevTasks) => prevTasks.filter((task) => task.taskId !== id));
@@ -27,6 +29,7 @@ const TaskCart = ({task,className,state,setEditTask,setShow}) => {
       .catch((error) => {
         console.log("Error deleting task:", error);
       });
+      setLoading(false)
   };
   
     return (
@@ -42,7 +45,7 @@ const TaskCart = ({task,className,state,setEditTask,setShow}) => {
             setEditTask(task)
             }}
              className="col-2"/>
-             <DeleteModal handleDelete={handleDelete} message="Are you shoure?" task={task} />
+             <DeleteModal loading={loading} handleDelete={handleDelete} title={task.title} id={task.taskId}/>
           
         </div>
         </div>

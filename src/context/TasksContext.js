@@ -6,10 +6,27 @@ import { AuthContext } from "./UserContext";
 
 export const TaskContext = createContext();
 
+
+
+
 export const TaskContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-   const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [categories, setCatergories] = useState([]);
+  
+  const [taskFilter, setTaskFilter] = useState("All"); // Default filter is "All"
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const getFilteredTasks = (tasks) => {
+    if (taskFilter === "done"||"notDone") {
+      return tasks; // Return all tasks when the filter is set to "All"
+    } else if (taskFilter === "notDone") {
+      return tasks.filter((task) => task.state === "notDone");
+    } else if (taskFilter === "done") {
+      return tasks.filter((task) => task.state === "done");
+    }
+
+  };
+
 
   const getCategoris = async () => {
     try {
@@ -42,6 +59,12 @@ export const TaskContextProvider = ({ children }) => {
   useEffect(() => {
     getCategoris();
   }, [currentUser]);
+
+  useEffect(() => {
+    const filtered = getFilteredTasks(tasks);
+    setFilteredTasks(filtered);
+  }, [tasks, taskFilter]);
+
   const getTasks = async () => {
     try {
       const taskRef = collection(db, 'task');
@@ -65,45 +88,12 @@ export const TaskContextProvider = ({ children }) => {
           taskData.push(newdata);
         }
       });
-  
-      // Set tasks here after fetching and processing data
-      setTasks(taskData);
+        setTasks(taskData);
     } catch (error) {
       console.error('Error fetching task data:', error);
       throw error;
     }
   };
-  
-  // const getTasks = async () => {
-  //   try {
-  //     const taskRef = collection(db, 'task');
-  //     const querySnapshot = await getDocs(taskRef);
-  //     const taskData = [];
-      
-  //     querySnapshot.forEach((doc) => {
-  //       const data = doc.data();
-  //       let cate = categories.find(c => c.catId === data.cateId);
-  //       let newdata = {
-  //         cateId: data.cateId,
-  //         taskId: data.taskId,
-  //         title: data.title,
-  //         uId: data.uId,
-  //         state:data.state,
-  //         cateTitle: cate?.title,
-  //         cateColor: cate?.color,
-  //       }
-  //       taskData.push(newdata);
-  //     });
-      
-  //     // Set tasks here after fetching and processing data
-  //     setTasks(taskData);
-  //   } catch (error) {
-  //     console.error('Error fetching task data:', error);
-  //     throw error;
-  //   }
-  // }
-
-  // Use a useEffect to watch the categories state
   useEffect(() => {
     // Call the function to set tasks when categories change
     getTasks();
@@ -112,7 +102,7 @@ export const TaskContextProvider = ({ children }) => {
 
 
   return (
-    <TaskContext.Provider value={{ setTasks, tasks, setCatergories, categories }}>
+    <TaskContext.Provider value={{ setTasks, tasks: filteredTasks, setCatergories, categories, taskFilter, setTaskFilter }}>
       {children}
     </TaskContext.Provider>
   );
