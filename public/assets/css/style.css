@@ -33,8 +33,38 @@ body{
 
 *{
     font-family: Metropolis;
-    /* text-align: right; */
 }
+
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    scroll-behavior: smooth;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:  #b197eb; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background:  #7f56da
+  }
+  @media screen and (max-width: 768px){
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent; /* make scrollbar transparent */
+    }
+  }
+
 h3{
     font-family: MetropolisBold;
     font-weight:bold
@@ -58,28 +88,10 @@ h3{
     cursor: pointer !important;
 }
 
-.transition_200{
-    transition: all 200ms ease;
-}
-/* .text_hover_shadow:hover{
-    text-shadow: 0 0 3px black;
-} */
-.text_shdow{
-    text-shadow: 0 0 8px rgb(14, 215, 241);
-}
 
-.lathin_text{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
 
-.h_fit{
-    height: fit-content;
-}
 
-.h-100-vh{
-    height: 100vh;
-}
+
 
 .auth_box{
    border-radius: 0.5rem;
@@ -98,12 +110,16 @@ h3{
 }
 
 .tasks{
-    max-height: calc(80vh);
+    max-height: calc(73vh);
     overflow-y: scroll;
     overflow-x:hidden
     /* vh-50 overflow-y-hidden */
 }
-
+.menu{
+    position: absolute;
+    z-index: 1000;
+    margin-bottom: 20px;
+}
 
 
 
@@ -148,15 +164,25 @@ h3{
 }
 
 .sidebare{
-    /* background-color: rgb(230, 214, 245); */
     display: flex;
     position: relative;
-    height: 100vh;
-    /* justify-content: center; */
     align-items: center;
-    overflow-y: scroll;
-}
+    overflow-y: hidden;
+    transition-duration: 0.4s;
 
+}
+/* CSS for the fadeInLeft animation */
+.my-element-enter {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  .my-element-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
 
 .color-box{
 width: 10px;
@@ -187,6 +213,7 @@ margin-right: 5px;
     background-color: white;
     border: none;
     color: black;
+    transition-duration: 0.4s;
 }
 .btn:hover{
     background-color: white;
@@ -214,9 +241,18 @@ margin-right: 5px;
     margin-right: 5px;
     border: none;
     font-size: 14px;
+    transition-duration: 0.4s;
     /* color: rgb(207, 207, 207);  */
 }
-
+.chips:hover{
+    background-color: #7f56da !important;
+    color: white;
+}
+.chips:focus{
+    background-color: #7f56da !important;
+    color: white;
+   }
+  
 .logout{
     position: absolute;
     bottom: 10%;
@@ -298,6 +334,7 @@ margin-right: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition-duration: 0.4s;
     /* padding: 10px; */
    
 } 
@@ -323,6 +360,7 @@ margin-right: 5px;
         border: 1px solid rgb(207, 207, 207);  
         border-radius: 10px;
         color: rgb(207, 207, 207);
+        transition-duration: 0.2s;
     }
     .add:hover{
         color: rgb(128, 126, 126);
@@ -330,11 +368,24 @@ margin-right: 5px;
     .f-sidebare{
         font-size: 15px;
         color: rgb(128, 126, 126);
+        transition-duration: 0.4s;
+        scrollbar-width: none; 
+  -ms-overflow-style: none;
+  /* overflow-y: scroll; */
     }
     .f-sidebare:hover{
         color: rgb(68, 68, 68);
         background-color: rgb(223, 223, 223);
         border-radius: 5px  !important;
+        color: white;
+    }
+    .f-sidebare-focus{
+        background-color: #7f56da !important;
+        color: white;
+        border-radius: 5px;
+          max-height: 60vh;
+        /* overflow-y: scroll;
+        -ms-overflow-style: none; */
     }
    .color-war{
     color: red;
@@ -359,3 +410,9 @@ margin-right: 5px;
     display: flex;
     
    }
+   .color-perpul{
+   color:#7f56da !important;
+   font-weight: bold;
+   font-size: large;
+   }
+ 

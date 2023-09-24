@@ -8,8 +8,10 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import AddCategory from "../Category/AddCategory";
 import Collaps from "../form/Collaps";
+import 'animate.css';
 
-const SideBar = () => {
+
+const SideBar = ({className,seToggle}) => {
   const {setSelectedCateId,categories } = useContext(TaskContext);
   const hadlerFilter= id => setSelectedCateId(id)
   const handelSetAllTasks=()=>setSelectedCateId("All")
@@ -25,18 +27,23 @@ useEffect(()=>{
     })
   );
 },[categories])
-
+// animate__animated animate__fadeInLefte animate__delay-2s
   return (
-    <div className="d-none d-md-flex col-2 sidebare ">
-      <img className="col-6" src={pic} alt="" />
+    
+    <div className={` ${className} d-md-flex col-12 col-md-2 vh-100 sidebare `}>
+      <img className="col-4 md-2 md-md-0 col-md-6" src={pic} alt="" onClick={()=>{seToggle(false)}}/> 
       <div className="d-flex flex-column sid-content col-9">
-        <div className="cursor-pointer mb-1 ps-3 f-sidebare" onClick={()=>{handelSetAllTasks() }}>
-          <BsClipboard2Check className="icon"/>
+        <div className="cursor-pointer mb-1 ps-3 f-sidebare color-perpul mt-2 mt-md-0" onClick={()=>{
+          handelSetAllTasks();
+          seToggle(false)
+        }}>
+         <BsClipboard2Check className="icon"/>
           Tasks
         </div>
-        <Collaps title="Categories" options={options} handelClick={hadlerFilter}>
+        <div className="collaps">
+        <Collaps title="Categories" options={options} handelClick={hadlerFilter} className={"f-sidebare"} seToggle={seToggle}>
           <AddCategory className="col-10 text-center mt-2 add" />
-        </Collaps>
+        </Collaps></div>
         <div className="cursor-pointer mt-1 ps-3 f-sidebare">
           <IoSettingsOutline className="icon" />
           Setting

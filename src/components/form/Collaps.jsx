@@ -6,16 +6,19 @@ import { FiFolderPlus } from "react-icons/fi";
 import { Collapse } from "react-bootstrap";
 import { ConvertColor } from "./ConvertColor";
 
-const Collaps = ({ title, options, children,handelClick }) => {
+const Collaps = ({ title, options, children, handelClick, className,seToggle }) => {
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState("5");
   const toggleCollapse = () => {
     setOpen(!open);
   };
- 
+
   return (
     <>
       <div
-        className={`cursor-pointer border-radius-up f-sidebare  ps-3 ${open ? "bg-darker" : null } `}
+        className={`cursor-pointer border-radius-up f-sidebare  ps-3 ${
+          open ? "bg-darker" : null
+        } `}
         onClick={toggleCollapse}
         aria-expanded={open}
       >
@@ -28,24 +31,38 @@ const Collaps = ({ title, options, children,handelClick }) => {
           {open ? <BiChevronUp /> : <BiChevronDown />}
         </span>
       </div>
-      {options&&
-      <Collapse in={open} className="bg-darker border-radius-d ps-4 ">
-      <div id="collapse ">
-        {options && options?.map((option) => (
-          <div key={option?.id+"_"} className="d-flex flex-row pointer f-sidebare col-12" onClick={()=>{handelClick(option?.id)}}>
-            <ConvertColor item={option?.color} className="d-flex color-box" />
-            <div
-              className="d-flex  "
-              key={option?.id + "_" + option?.value}
-            >
-              {option?.value}
-            </div>
+      {options && (
+        <Collapse in={open} className="bg-darker border-radius-d ps-4 ">
+          <div id="collapse ">
+            {options &&
+              options?.map((option) => (
+                <div
+                  key={option?.id + "_"}
+                  className={`d-flex flex-row pointer col-12 ${className} ${id===option?.id? `${className}` +"-focus":""}`}
+                  onClick={() => {
+                    handelClick(option?.id);
+                    setId(option?.id);
+                    seToggle((old)=>!old)
+                  }}
+                >
+                  {option?.color && (
+                    <ConvertColor
+                      item={option?.color}
+                      className="d-flex color-box"
+                    />
+                  )}
+                  <div
+                    className="d-flex  "
+                    key={option?.id + "_" + option?.value}
+                  >
+                    {option?.value}
+                  </div>
+                </div>
+              ))}
+            {children}
           </div>
-        ))}
-        {children}
-      </div>
-    </Collapse>
-      }
+        </Collapse>
+      )}
     </>
   );
 };

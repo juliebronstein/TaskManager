@@ -13,7 +13,6 @@ const TaskCart = ({ task, className, state, setEditTask, setShow }) => {
     try {
       const taskDocRef = doc(db, "task", taskId); // Reference to the task document with taskId
       await deleteDoc(taskDocRef);
-      console.log("Task deleted successfully");
     } catch (error) {
       console.error("Error deleting task:", error);
       throw error; // Handle the error in your component
