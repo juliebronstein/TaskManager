@@ -13,20 +13,30 @@ export const TaskContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [categories, setCatergories] = useState([]);
-  
   const [taskFilter, setTaskFilter] = useState("All"); // Default filter is "All"
+  const [selectedCateId, setSelectedCateId] = useState("All"); // Default filter is "All"
   const [filteredTasks, setFilteredTasks] = useState([]);
+
   const getFilteredTasks = (tasks) => {
-    if (taskFilter === "done"||"notDone") {
-      return tasks; // Return all tasks when the filter is set to "All"
+    if(selectedCateId==="All"){
+    if (taskFilter === "All") {
+      // Return all tasks when the filter is set to "All"
+      return tasks;
     } else if (taskFilter === "notDone") {
-      return tasks.filter((task) => task.state === "notDone");
+      return tasks.filter((task) => task.state === "notDone" );
     } else if (taskFilter === "done") {
-      return tasks.filter((task) => task.state === "done");
+      return tasks.filter((task) => task.state === "done" );
+    }}
+    else{
+      if (taskFilter === "All") {
+        return tasks.filter((task) =>  task.cateId===selectedCateId )
+      } else if (taskFilter === "notDone") {
+        return tasks.filter((task) => task.state === "notDone" && task.cateId===selectedCateId );
+      } else if (taskFilter === "done") {
+        return tasks.filter((task) => task.state === "done" && task.cateId===selectedCateId );
+      }
     }
-
   };
-
 
   const getCategoris = async () => {
     try {
@@ -63,7 +73,7 @@ export const TaskContextProvider = ({ children }) => {
   useEffect(() => {
     const filtered = getFilteredTasks(tasks);
     setFilteredTasks(filtered);
-  }, [tasks, taskFilter]);
+  }, [tasks, taskFilter , selectedCateId]);
 
   const getTasks = async () => {
     try {
@@ -102,7 +112,7 @@ export const TaskContextProvider = ({ children }) => {
 
 
   return (
-    <TaskContext.Provider value={{ setTasks, tasks: filteredTasks, setCatergories, categories, taskFilter, setTaskFilter }}>
+    <TaskContext.Provider value={{ setTasks, tasks: filteredTasks, setCatergories, categories, taskFilter, setTaskFilter ,selectedCateId, setSelectedCateId }}>
       {children}
     </TaskContext.Provider>
   );

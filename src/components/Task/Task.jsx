@@ -12,7 +12,7 @@ const onSubmit = async (values, actions) => {};
 const validationSchema = Yup.object({ });
 
 
-const Task = ({setEditTask,setShow,data}) => {
+const Task = ({setEditTask,setShow}) => {
 const { tasks, setTasks} = useContext(TaskContext);
 
 const setDoneTask = async (task) => {
@@ -66,7 +66,7 @@ const setDoneTask = async (task) => {
         {(formik) => {
           return (
             <Form className="col-12 d-flex flex-column tasks">
-              {data.map((task) => (
+              {tasks.map((task) => (
                 <div key={task.taskId + "=="} className="d-flex flex-row mb-2">
                   <FormikControl
                     className="col-2"

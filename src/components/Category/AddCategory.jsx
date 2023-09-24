@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormikControl from "../components/form/FormikControl";
-import ModalCenter from "./Modal";
-import AddButton from "./Task/AddButton";
-import { AuthContext } from "../context/UserContext";
-import { TaskContext } from "../context/TasksContext";
+import FormikControl from "../form/FormikControl";
+import ModalCenter from "../Modal";
+import AddButton from "../Task/AddButton";
+import { AuthContext } from "../../context/UserContext";
+import { TaskContext } from "../../context/TasksContext";
 import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { Spinner } from "react-bootstrap";
 
 const initialValues = {

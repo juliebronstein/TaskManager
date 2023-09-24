@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import SideBar from '../components/SideBare';
 import Tasks from '../components/Task/Tasks';
+import SideBar from '../components/Sidebar/SideBare';
 const Home = () => {
 
 

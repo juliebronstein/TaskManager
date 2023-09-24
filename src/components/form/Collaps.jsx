@@ -6,11 +6,12 @@ import { FiFolderPlus } from "react-icons/fi";
 import { Collapse } from "react-bootstrap";
 import { ConvertColor } from "./ConvertColor";
 
-const Collaps = ({ title, options, children,filterOption }) => {
+const Collaps = ({ title, options, children,handelClick }) => {
   const [open, setOpen] = useState(false);
   const toggleCollapse = () => {
     setOpen(!open);
   };
+ 
   return (
     <>
       <div
@@ -27,23 +28,24 @@ const Collaps = ({ title, options, children,filterOption }) => {
           {open ? <BiChevronUp /> : <BiChevronDown />}
         </span>
       </div>
+      {options&&
       <Collapse in={open} className="bg-darker border-radius-d ps-4 ">
-        <div id="collapse ">
-          {options && options?.map((option) => (
-            <div key={option.catId+"_"} className="d-flex flex-row">
-              <ConvertColor item={option.color} className="d-flex color-box" />
-              <div
-                className="d-flex pointer f-sidebare"
-                key={option.id + "_" + option.title}
-                onClick={filterOption}
-              >
-                {option.title}
-              </div>
+      <div id="collapse ">
+        {options && options?.map((option) => (
+          <div key={option?.id+"_"} className="d-flex flex-row pointer f-sidebare col-12" onClick={()=>{handelClick(option?.id)}}>
+            <ConvertColor item={option?.color} className="d-flex color-box" />
+            <div
+              className="d-flex  "
+              key={option?.id + "_" + option?.value}
+            >
+              {option?.value}
             </div>
-          ))}
-          {children}
-        </div>
-      </Collapse>
+          </div>
+        ))}
+        {children}
+      </div>
+    </Collapse>
+      }
     </>
   );
 };

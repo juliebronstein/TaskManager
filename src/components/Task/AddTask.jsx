@@ -7,7 +7,7 @@ import ModalCenter from "../Modal";
 import FormikControl from "../form/FormikControl";
 import { TaskContext } from "../../context/TasksContext";
 import { Spinner } from "react-bootstrap";
-import AddCategory from "../AddCategory";
+import AddCategory from "../Category/AddCategory";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 

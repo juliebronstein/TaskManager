@@ -5,11 +5,8 @@ import { IoWarningOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 function DeleteModal({ loading, handleDelete, title, id }) {
   const [show, setShow] = useState(false);
-  const [showM, setShowM] = useState(false);
-  const [showMe, setShowMe] = useState(0);
   const handleClose = () =>  setShow(false);
   const handleShow = () => setShow(true);
-  const handleShowM = () => setShowM(true);
 
 
   return (
@@ -43,7 +40,6 @@ function DeleteModal({ loading, handleDelete, title, id }) {
               variant="primary"
               className="col-5 ms-1 me-1 submit border-n"
               onClick={() => {
-                setShowM(true);
                 handleDelete(id)
               }}
             >
@@ -56,28 +52,7 @@ function DeleteModal({ loading, handleDelete, title, id }) {
         </Modal.Footer>
       </Modal>
 
-      <Modal
-        show={showM}
-        onHide={() => {
-          setShowM(false);
-        }}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Dalete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Dalete sucsessFul!</Modal.Body>
-        <Modal.Footer>
-          <button
-            variant="secondary"
-            onClick={() => {
-              setShowM(false);
-            }}
-          >
-            Close
-          </button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </>
   );
 }
 
