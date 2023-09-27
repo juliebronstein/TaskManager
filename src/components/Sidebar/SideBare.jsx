@@ -13,7 +13,9 @@ import 'animate.css';
 
 const SideBar = ({className,seToggle}) => {
   const {setSelectedCateId,categories } = useContext(TaskContext);
-  const hadlerFilter= id => setSelectedCateId(id)
+  const hadlerFilter= id => {setSelectedCateId(id)
+    seToggle((old)=>!old)
+  }
   const handelSetAllTasks=()=>setSelectedCateId("All")
   const [options,setOptions]=useState([null])
 useEffect(()=>{
@@ -31,7 +33,7 @@ useEffect(()=>{
   return (
     
     <div className={` ${className} d-md-flex col-12 col-md-2 vh-100 sidebare `}>
-      <img className="col-4 md-2 md-md-0 col-md-6" src={pic} alt="" onClick={()=>{seToggle(false)}}/> 
+      <img className="col-3 col-md-4" src={pic} alt="" onClick={()=>{seToggle(false)}}/> 
       <div className="d-flex flex-column sid-content col-9">
         <div className="cursor-pointer mb-1 ps-3 f-sidebare color-perpul mt-2 mt-md-0" onClick={()=>{
           handelSetAllTasks();
@@ -41,7 +43,7 @@ useEffect(()=>{
           Tasks
         </div>
         <div className="collaps">
-        <Collaps title="Categories" options={options} handelClick={hadlerFilter} className={"f-sidebare"} seToggle={seToggle}>
+        <Collaps title="Categories" options={options} handelClick={hadlerFilter} className={"f-sidebare"} >
           <AddCategory className="col-10 text-center mt-2 add" />
         </Collaps></div>
         <div className="cursor-pointer mt-1 ps-3 f-sidebare">

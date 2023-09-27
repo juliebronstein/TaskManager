@@ -13,10 +13,11 @@ function DeleteModal({ loading, handleDelete, title, id }) {
     <>
       <MdDelete onClick={handleShow} className="col-2" />
       <Modal
-        show={show}
-        onHide={handleClose}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
+      show={show}
+      onHide={handleClose}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+        
       >
         <Modal.Header closeButton>
           <Modal.Title className="align-item-center">
@@ -43,10 +44,9 @@ function DeleteModal({ loading, handleDelete, title, id }) {
                 handleDelete(id)
               }}
             >
-              {loading && (
+              Yes{" "} {loading && (
                 <Spinner animation="border" role="status" size="sm" />
-              )}{" "}
-              Yes
+              )}
             </button>
           </div>
         </Modal.Footer>

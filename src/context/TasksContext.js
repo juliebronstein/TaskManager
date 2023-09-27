@@ -6,9 +6,6 @@ import { AuthContext } from "./UserContext";
 
 export const TaskContext = createContext();
 
-
-
-
 export const TaskContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);

@@ -1,6 +1,6 @@
 {
-  "homepage": "https://juliebronstein.github.io/TodoList",
-  "name": "ToDoList",
+  "homepage": "https://juliebronstein.github.io/TaskManager",
+  "name": "TaskManager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

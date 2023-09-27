@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Task from "./Task";
-import AddTask from "./AddTask";
+import AddTask from "./AddTask/AddTask";
 import { VscFilterFilled } from "react-icons/vsc";
 import { TaskContext } from "../../context/TasksContext";
 import { IoMenuSharp } from "react-icons/io5";
@@ -19,7 +19,7 @@ const Tasks = ({ className, seToggle }) => {
           onClick={() => {
             seToggle((old) => !old);
           }}
-          className="col-10 add-cate d-flex d-md-none add text-center "
+          className="col-10  d-block d-md-none pointer add text-center "
         >
           {<IoMenuSharp />} Menu
         </button>

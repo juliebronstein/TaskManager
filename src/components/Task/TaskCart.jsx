@@ -9,24 +9,30 @@ import DeleteModal from "../DeleteModal";
 const TaskCart = ({ task, className, state, setEditTask, setShow }) => {
   const { setTasks } = useContext(TaskContext);
   const [loading, setLoading] = useState(false);
-  const deleteTask = async (taskId) => {
+  // const deleteTask = async (taskId) => {
+   
+  //   try {
+  //     const taskDocRef = doc(db, "task", taskId); // Reference to the task document with taskId
+  //     await deleteDoc(taskDocRef);
+  //   } catch (error) {
+  //     console.error("Error deleting task:", error);
+  //     throw error; // Handle the error in your component
+  //   }
+  // };
+  const handleDelete =async (taskId) => {
+     setLoading(true)
     try {
       const taskDocRef = doc(db, "task", taskId); // Reference to the task document with taskId
-      await deleteDoc(taskDocRef);
-    } catch (error) {
-      console.error("Error deleting task:", error);
-      throw error; // Handle the error in your component
-    }
-  };
-  const handleDelete = (id) => {
-    setLoading(true);
-    deleteTask(id)
-      .then(() => {
-        setTasks((prevTasks) => prevTasks.filter((task) => task.taskId !== id));
+      await deleteDoc(taskDocRef).then(() => {
+       
+        setTasks((prevTasks) => prevTasks.filter((task) => task.taskId !== taskId));
       })
       .catch((error) => {
         console.log("Error deleting task:", error);
-      });
+      });} catch (error) {
+        console.error("Error deleting task:", error);
+        throw error; // Handle the error in your component
+      } 
     setLoading(false);
   };
 

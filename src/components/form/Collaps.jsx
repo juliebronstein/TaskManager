@@ -6,7 +6,7 @@ import { FiFolderPlus } from "react-icons/fi";
 import { Collapse } from "react-bootstrap";
 import { ConvertColor } from "./ConvertColor";
 
-const Collaps = ({ title, options, children, handelClick, className,seToggle }) => {
+const Collaps = ({ title, options, children, handelClick, className }) => {
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("5");
   const toggleCollapse = () => {
@@ -42,7 +42,6 @@ const Collaps = ({ title, options, children, handelClick, className,seToggle }) 
                   onClick={() => {
                     handelClick(option?.id);
                     setId(option?.id);
-                    seToggle((old)=>!old)
                   }}
                 >
                   {option?.color && (
